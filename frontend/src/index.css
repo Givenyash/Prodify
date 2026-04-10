@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Figtree:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 240 5% 96%;
+        --foreground: 240 10% 4%;
+        --card: 0 0% 100%;
+        --card-foreground: 240 10% 4%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 240 10% 4%;
+        --primary: 240 6% 10%;
+        --primary-foreground: 0 0% 98%;
+        --secondary: 240 5% 96%;
+        --secondary-foreground: 240 6% 10%;
+        --muted: 240 5% 96%;
+        --muted-foreground: 240 4% 46%;
+        --accent: 240 5% 96%;
+        --accent-foreground: 240 6% 10%;
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 6% 90%;
+        --input: 240 6% 90%;
+        --ring: 240 6% 10%;
+        --radius: 0.5rem;
+        
+        /* Custom accents */
+        --priority-high: 0 84% 60%;
+        --priority-medium: 38 92% 50%;
+        --priority-low: 160 84% 39%;
+        --progress: 217 91% 60%;
+    }
+    
+    .dark {
+        --background: 240 10% 4%;
+        --foreground: 0 0% 98%;
+        --card: 240 6% 10%;
+        --card-foreground: 0 0% 98%;
+        --popover: 240 6% 10%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 0 0% 98%;
+        --primary-foreground: 240 6% 10%;
+        --secondary: 240 4% 16%;
+        --secondary-foreground: 0 0% 98%;
+        --muted: 240 4% 16%;
+        --muted-foreground: 240 5% 65%;
+        --accent: 240 4% 16%;
+        --accent-foreground: 0 0% 98%;
+        --destructive: 0 63% 31%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 4% 16%;
+        --input: 240 4% 16%;
+        --ring: 240 5% 84%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Figtree', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Outfit', sans-serif;
+        @apply tracking-tight;
+    }
+}
+
+@layer components {
+    /* Glass morphism header */
+    .glass-header {
+        @apply backdrop-blur-xl bg-white/70 dark:bg-black/60 border-b border-border/40;
+    }
+    
+    /* Kanban column */
+    .kanban-column {
+        @apply bg-zinc-100 dark:bg-zinc-900 rounded-xl min-h-[calc(100vh-12rem)];
+    }
+    
+    /* Task card */
+    .task-card {
+        @apply bg-white dark:bg-zinc-800 border border-black/5 dark:border-white/5 
+               shadow-sm rounded-lg transition-all duration-200 
+               hover:-translate-y-1 hover:shadow-md hover:ring-1 hover:ring-border;
+    }
+    
+    /* Task card dragging */
+    .task-card-dragging {
+        @apply scale-105 shadow-xl rotate-2 cursor-grabbing;
+    }
+    
+    /* Priority badges */
+    .priority-high {
+        @apply bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400;
+    }
+    
+    .priority-medium {
+        @apply bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400;
+    }
+    
+    .priority-low {
+        @apply bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400;
+    }
+    
+    /* Overdue badge */
+    .overdue {
+        @apply bg-red-500 text-white;
+    }
+    
+    /* Staggered animation */
+    .stagger-1 { animation-delay: 0ms; }
+    .stagger-2 { animation-delay: 100ms; }
+    .stagger-3 { animation-delay: 200ms; }
+}
+
+@layer utilities {
+    .animate-fade-up {
+        animation: fadeUp 0.5s ease-out forwards;
+        opacity: 0;
+    }
+    
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .scrollbar-thin {
+        scrollbar-width: thin;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-track {
+        @apply bg-transparent;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+        @apply bg-zinc-300 dark:bg-zinc-700 rounded-full;
+    }
+}
+
+/* Debug wrapper */
+[data-debug-wrapper="true"] {
+    display: contents !important;
+}
